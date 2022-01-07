@@ -1,4 +1,3 @@
-/*
 // Урок 2.1
 alert('Я JavaScript!')
 
@@ -531,7 +530,7 @@ function extractCurrencyValue(str) {
   return +str.slice(1);
 }
 
-*/
+
 
 
 // Урок 5.3
