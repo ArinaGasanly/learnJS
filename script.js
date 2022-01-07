@@ -1,3 +1,4 @@
+/*
 // Урок 2.1
 alert('Я JavaScript!')
 
@@ -246,3 +247,291 @@ ask(
   () => alert("Вы согласились."),
   () => alert("Вы отменили выполнение.")
 );
+
+
+// Урок 3.2
+
+function pow(x, n) 
+{
+  let result = 1;
+  for (let i = 0; i < n; i++) 
+  {result *= x; }
+  return result;
+}
+
+let x = prompt("x?", ''), 
+n = prompt("n?", '');
+
+if (n < 0) 
+{
+  alert(`Степень ${n} не поддерживается, 
+  введите целую степень, большую 0`);
+} else {
+  alert(pow(x, n));
+}
+
+
+
+// Урок 4.1
+
+let user = {};
+
+user.name = "John";
+user.surname = "Smith";
+user.name = "Pete";
+
+delete user.name;
+
+
+
+
+function isEmpty (obj) {
+  for (let key in obj) {
+    return false;
+  }
+  return true;
+}
+
+
+
+let salaries = {
+  John: 100,
+  Ann: 160,
+  Pete: 130
+}
+
+let sum = 0;
+
+
+
+  for (let key in salaries) {
+   sum += salaries[key]
+  }
+  
+  alert(sum);
+
+
+
+
+
+
+function multiplyNumeric(obj) {
+  for (let key in obj) {
+    if (typeof obj[key] == 'number') {
+      obj[key] *= 2;
+    }
+  }
+}
+
+
+
+// Урок 4.2
+
+let calculator = {
+  mul () {
+    return this.a * this.b;
+  },
+  sum() {
+    return this.a + this.b;
+  },
+  read() {
+    this.a = +prompt("a?", 0);
+    this.b = +prompt("b?", 0);
+  }
+};
+
+calculator.read();
+alert(calculator.sum());
+alert(calculator.mul());
+
+
+
+let ladder = {
+  step: 0,
+  up() {
+    this.step++;
+    return this;
+  },
+  down() {
+    this.step--;
+    return this;
+  },
+  showStep: function () { // показывает текущую ступеньку
+    alert (this.step)
+    return this;
+  }
+};
+
+ladder.up().up().up().down().up().down().showStep();
+
+
+
+// Урок 4.3
+
+let obj = {};
+
+function A() { 
+  return obj;
+}
+function B() {
+  return obj;
+}
+
+alert(new A() == new B());
+
+
+
+
+
+function Calculator () {
+this.read = function () {
+    this.a = +prompt("a?", 0);
+    this.b = +prompt("b?", 0);
+  };
+
+  this.sum = function () {
+    return this.a + this.b;
+  };
+    this.mul = function () {
+    return this.a * this.b;
+  };
+
+}
+
+let calculator = new Calculator();
+
+calculator.read();
+
+alert("Sum=" + calculator.sum());
+alert("Mul=" + calculator.mul());
+
+
+
+
+function Accumulator(startingValue) {
+  this.value = startingValue;
+
+  this.read = function () {
+    this.value += +prompt("Число?", 0);
+    
+  };
+
+}
+
+let accumulator = new Accumulator(10);
+accumulator.read();
+accumulator.read();
+
+
+alert(accumulator.value);
+
+
+
+// Урок 5.1
+
+
+let a = +prompt("Введите 1 число!", '');
+let b = +prompt("Введите 2 число!", '');
+
+
+alert (a + b);
+
+
+
+alert(Math.round(6.35 * 10) / 10);
+
+
+
+
+function readNumber () {
+let num;
+
+  do {
+    num = +prompt("Введите число!", 0);
+  } while (!isFinite(num));
+
+  if (num === null || num === '') return null;
+
+  return +num;
+}
+
+alert(`число: ${readNumber()}`);
+
+
+
+
+function random(min, max) {
+ return min + Math.random() * (max - min);
+}
+
+alert(random(1, 5));
+alert(random(1, 5));
+alert(random(1, 5));
+
+
+
+function randomInteger(min, max) {
+  let random = min + Math.random() * (max + 1 - min);
+  return Math.floor(random);
+}
+
+alert(randomInteger(1, 5)); 
+alert(randomInteger(1, 5)); 
+alert(randomInteger(1, 5));
+
+
+
+
+
+let str = prompt('Введите строку', '');
+
+function ucFirst() {
+  str = prompt('Введите строку', '');
+
+  if (str != '') return true;
+
+}
+
+alert(str[0].toUpperCase() + str.slice(1));
+
+
+
+function ucFirst(str) {
+  if (!str) return str;
+
+  return str[0].toUpperCase() + str.slice(1);
+}
+
+alert(ucFirst("вася"));
+
+
+let str = prompt('Spam check', '');
+
+function checkSpam (str) {
+  let lowStr = str.toLowerCase();
+
+  return lowStr.includes('viagra') || lowStr.includes('XXX');
+ 
+}
+
+alert(checkSpam('buy ViAgRA now'));
+alert(checkSpam('free xxxxx'));
+alert(checkSpam("innocent rabbit"));
+
+
+
+function truncate(str, maxlength) {
+  return (str.legth > maxlength) ?
+     str.slice(0, maxlength - 1) + '…' : str;
+  }
+
+
+
+function extractCurrencyValue(str) {
+  return +str.slice(1);
+}
+
+*/
+
+
+// Урок 5.3
