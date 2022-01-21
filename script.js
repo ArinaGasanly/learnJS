@@ -534,3 +534,565 @@ function extractCurrencyValue(str) {
 
 
 // Урок 5.3
+
+let styles = ["Джаз", "Блюз"];
+
+styles.push("Рок-н-ролл");
+
+styles[Math.floor((styles.length - 1) / 2)] = "Классика";
+//styles[1] = "Классика";
+
+styles.shift("Джаз");
+
+styles.unshift("Рэп", "Регги");
+
+console.log(styles)
+
+
+
+
+
+function sumInput() {
+
+  let numbers = [];
+  
+   while (true) {
+
+     let value = prompt("Введите число", 0);
+
+     if (value === '' || value === null || !isFinite(value)) break;
+
+     numbers.push(+value);
+  }
+
+  let sum = 0;
+
+  for (let number of numbers) {
+    sum += number;
+  }
+
+  return sum;
+}
+
+console.log(sumInput() );
+
+
+
+function getMaxSubSum(arr) {
+let maxSum = 0;
+
+ 
+
+ for (let i = 0; i < arr.length; i++) {
+   let sumFixedStart = 0;
+   for (let j = i; j < arr.length; j++) {
+     sumFixedStart += arr[j];
+     maxSum = Math.max(maxSum, sumFixedStart);
+   }
+ }
+
+ return maxSum;
+}
+
+
+getMaxSubSum([-1, 2, 3, -9]);
+getMaxSubSum([2, -1, 2, 3, -9]);
+getMaxSubSum([-1, 2, 3, -9, 11]);
+getMaxSubSum([-2, -1, 1, 2]);
+getMaxSubSum([100, -9, 2, -3, 5]);
+getMaxSubSum([1, 2, 3]);
+
+function getMaxSubSum(arr) {
+  let maxSum = 0;
+  let partialSum = 0;
+
+  for (let item of arr) { // для каждого элемента массива
+    partialSum += item; // добавляем значение элемента к partialSum
+    maxSum = Math.max(maxSum, partialSum); // запоминаем максимум на данный момент
+    if (partialSum < 0) partialSum = 0; // ноль если отрицательное
+  }
+
+  return maxSum;
+}
+
+alert(getMaxSubSum([-1, 2, 3, -9])); // 5
+alert(getMaxSubSum([-1, 2, 3, -9, 11])); // 11
+alert(getMaxSubSum([-2, -1, 1, 2])); // 3
+alert(getMaxSubSum([100, -9, 2, -3, 5])); // 100
+alert(getMaxSubSum([1, 2, 3])); // 6
+alert(getMaxSubSum([-1, -2, -3])); // 0
+
+
+
+// Урок 5.6
+
+
+
+
+function camelize(str) {
+
+return str
+
+.split('-')
+.map(
+  (word, index) => index == 0 ? word : word[0].toUpperCase() + word.slice()
+)
+
+.join('');
+}
+
+
+
+function filterRange(arr, a, b) {
+
+return arr.filter(item => (a <= item && item <= b));
+
+}
+let arr = [5, 3, 8, 1];
+
+let filtered = filterRange(arr, 1, 4);
+
+alert(filtered); // 3,1 (совпадающие значения)
+
+alert(arr); // 5,3,8,1 (без изменений)
+
+
+
+function filterRangeInPlace(arr, a, b) {
+
+ for (let i = 0; i < arr.length; i++) {
+   let val = arr[i]
+
+   if (val < a || val > b) {
+     arr.splice(i, 1);
+     i--;
+   }
+ }
+
+}
+
+let arr = [5, 3, 8, 1];
+
+filterRangeInPlace(arr, 1, 4); // удалены числа вне диапазона 1..4
+
+alert(arr); // [3, 1]
+
+
+
+function copySorted(arr) {
+ return arr.slice().sort();
+}
+
+let arr = ["HTML", "JavaScript", "CSS"];
+
+let sorted = copySorted(arr);
+
+alert(sorted); // CSS, HTML, JavaScript
+alert(arr); // HTML, JavaScript, CSS (без изменений)
+
+
+
+
+function Calculator () {
+
+  this.methods = {
+    "-": (a, b) => a - b,
+    "+": (a, b) => a + b
+  };
+
+  this.calculate = function(str) {
+
+  let split = str.split(' '),
+    a = +split[0],
+    op = split[1],
+    b = +split[2]
+
+    if (!this.methods[op] || isNaN(a) || isNaN(b)) {
+      return NaN;
+    } 
+    return this.methods[op] (a, b);
+  }
+
+  this.addMethod = function (name, func) {
+    this.methods[name] = func;
+  };
+}
+
+
+
+
+
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
+
+let users = [vasya, petya, masha];
+
+let names = users.map(item => item.name);
+
+
+
+alert(names); // Вася, Петя, Маша
+
+
+
+
+function sortByAge() {
+  arr.sort((a, b) => a.age > b.age ? 1 : 1);
+}
+
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
+
+let arr = [vasya, petya, masha];
+
+sortByAge(arr);
+
+// теперь отсортировано: [vasya, masha, petya]
+alert(arr[0].name); // Вася
+alert(arr[1].name); // Маша
+alert(arr[2].name); // Петя
+
+
+
+let vasya = { name: "Вася", surname: "Пупкин", id: 1 };
+let petya = { name: "Петя", surname: "Иванов", id: 2 };
+let masha = { name: "Маша", surname: "Петрова", id: 3 };
+
+let users = [vasya, petya, masha];
+
+let usersMapped = users.forEach(function(users) {
+  alert(`Fullname: ${users.name}` + " " + `${users.surname}` + "," + " " + "id:" + " " + `${users.id}`);
+});
+
+
+
+let vasya = { name: "Вася", surname: "Пупкин", id: 1 };
+let petya = { name: "Петя", surname: "Иванов", id: 2 };
+let masha = { name: "Маша", surname: "Петрова", id: 3 };
+
+let users = [vasya, petya, masha];
+
+let usersMapped = users.map(user => ({
+  fullName: `${user.name} ${user.surname}`,
+  id: user.id
+}));
+
+
+
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+  
+}
+
+let arr = [1, 2, 3];
+shuffle(arr);
+alert(arr);
+
+
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1)); // случайный индекс от 0 до i
+
+    // поменять элементы местами
+    // мы используем для этого синтаксис "деструктурирующее присваивание"
+    // подробнее о нём - в следующих главах
+    // то же самое можно записать как:
+    // let t = array[i]; array[i] = array[j]; array[j] = t
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+
+
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 29 };
+
+let users = [vasya, petya, masha];
+
+function getAverageAge(users) {
+  return users.reduce((prev, user) => prev + user.age, 0) / users.length;
+}
+
+let arr = [vasya, petya, masha];
+
+alert(getAverageAge(arr)); // 28
+
+
+function unique(arr) {
+  let result = [];
+
+  for (let str of arr) {
+    if (!result.includes(str)) {
+      result.push(str);
+    }
+  }
+  return result;
+}
+
+let strings = ["кришна", "кришна", "харе", "харе",
+  "харе", "харе", "кришна", "кришна", ":-O"
+];
+
+alert(unique(strings));
+
+
+
+function unique(arr) {
+  return Array.from(new Set(arr));
+}
+
+let values = ["Hare", "Krishna", "Hare", "Krishna",
+  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+
+alert(unique(values)); // Hare,Krishna,:-O
+
+
+
+
+function aclean(arr) {
+  let map = new Map();
+
+  for (let word of arr) {
+    let sorted = word.toLowerCase().split("").sort().join("");
+    map.set(sorted, word)
+  }
+  return Array.from(map.values());
+}
+
+let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+alert(aclean(arr)); // "nap,teachers,ear" или "PAN,cheaters,era"
+
+
+
+let map = new Map();
+
+map.set("name", "John");
+
+let keys = Array.from(map.keys());
+
+keys.push("more");
+
+alert(keys); // name, more
+
+
+
+let messageRead = new WeakSet();
+
+
+let messages = [
+  { text: "Hello", from: "John" },
+  { text: "How goes?", from: "John" },
+  { text: "See you soon", from: "Alice" }
+];
+
+messageRead.add("Hello"[0]);
+messageRead.add("How goes?"[1]);
+
+
+alert("Read message 0: " + messageRead.has(messages[0]));
+
+messageRead.shift()
+
+
+
+let messages = [
+  { text: "Hello", from: "John" },
+  { text: "How goes?", from: "John" },
+  { text: "See you soon", from: "Alice" }
+];
+
+let messageRead = new WeakMap();
+
+messageRead.set(messages[0], new Date(2017, 1,1));
+
+
+
+
+
+
+
+function sumSalaries(salaries) {
+
+  let sum = 0;
+  for (let salary of Object.values(salaries)) {
+    sum += salary;
+  }
+
+  return sum; // 650
+}
+
+
+let salaries = {
+  "John": 100,
+  "Pete": 300,
+  "Mary": 250
+};
+
+alert(sumSalaries(salaries)); // 650
+
+
+
+function count(obj) {
+ return Object.values(obj).length;
+  
+}
+
+let user = {
+  name: 'John',
+  age: 30
+};
+
+alert(count(user)); // 2
+
+
+
+let user = { name: "John", years: 30 };
+
+let { name, years: age, isAdmin = false} = user;
+
+alert(name); // John
+alert(age); // 30
+alert(isAdmin); // false
+
+
+
+let salaries = {
+  "John": 100,
+  "Pete": 300,
+  "Mary": 250
+};
+
+
+function topSalary(salaries) {
+ let max = 0;
+ let maxName = null;
+
+ for(const [name, salary] of Object.entries(salaries)) {
+   if (max < salary) {
+     max = salary;
+     maxName = name;
+   }
+ }
+
+ return maxName;
+}
+
+
+
+let date = new Date(2012, 1, 20, 3, 12);
+alert(date);
+
+
+
+function getWeekDay(date) {
+
+let days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+
+return days[date.getDay()];
+
+}
+
+let date = new Date(2014, 0, 3); // 3 января 2014 года
+alert(getWeekDay(date)); // ПТ
+
+
+
+
+function getLocalDay(date) {
+let day = date.getDay();
+
+if (day == 0) {
+  day = 7;
+}
+return day;
+}
+
+
+
+function getDateAgo(date, days) {
+  date.setDate(date.getDate() - days);
+  return date.getDate();
+ 
+}
+
+let date = new Date(2015, 0, 2);
+
+alert(getDateAgo(date, 1)); // 1, (1 Jan 2015)
+alert(getDateAgo(date, 2)); // 31, (31 Dec 2014)
+alert(getDateAgo(date, 365)); // 2, (2 Jan 2014)
+
+
+
+function getLastDayOfMonth(year, month) {
+  let date = new Date(year, month + 1, 0);
+  return date.getDate();
+}
+
+alert(getLastDayOfMonth(2012, 0)); // 31
+alert(getLastDayOfMonth(2012, 1)); // 29
+alert(getLastDayOfMonth(2013, 1)); // 28
+
+
+
+function getSecondsToday() {
+  let date = new Date();
+  return date.getHours() * 3600 + date.getMinutes * 60 + date.getSeconds();
+}
+
+
+
+function getSecondsToTomorrow() {
+  let now = new Date();
+  let tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+
+  let diff = tomorrow - now;
+  return Math.round(diff / 1000);
+}
+
+
+function formatDate(date) {
+  let diff = new Date() - date;
+  if (diff < 1000) {
+    return 'прямо сейчас';
+  }
+
+  let sec = Math.floor(diff / 1000);
+
+  if (sec < 60) {
+    return sec + 'сек. назад';
+  }
+
+  let d = date;
+  d = [
+    '0' + d.getDate(),
+    '0' + (d.getMonth() + 1),
+    '' + d.getFullYear(),
+    '0' + d.getHours(),
+    '0' + d.getMinutes()
+  ].map(component => component.slice(-2)); // взять последние 2 цифры из каждой компоненты
+
+  // соединить компоненты в дату
+  return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
+}
+
+
+
+let user = {
+  name: "Василий Иванович",
+  age: 35
+};
+
+let newUser = JSON.parse(JSON.stringify(user));
+
+
+
+alert(JSON.stringify(meetup, function replacer(key, value) {
+  return (key != "" && value == meetup) ? undefined : value;
+}));
+
